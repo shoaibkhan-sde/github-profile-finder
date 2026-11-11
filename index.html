@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0D1117" />
+
+  <title>GitHub Profile Finder</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css?v=5" />
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+
+      <a href="#" class="brand" aria-label="GitHub Profile Finder home">
+        <i data-lucide="github" class="brand-icon"></i>
+        <span>
+          GitHub Profile <span class="blue-text">Finder</span>
+        </span>
+      </a>
+
+      <div class="nav-actions">
+        <button
+          class="icon-button"
+          id="theme-toggle"
+          aria-label="Toggle light and dark theme"
+          title="Toggle theme"
+        >
+          <i data-lucide="moon" id="theme-icon"></i>
+        </button>
+
+        <a
+          href="https://github.com/shoaibkhan-sde"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="icon-button github-link"
+          aria-label="Visit GitHub"
+          title="Shoaib Khan on GitHub"
+        >
+          <i data-lucide="github"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <main id="main-content">
+
+    <section class="hero">
+
+      <!-- Decorative curved background -->
+      <svg
+        class="hero-waves"
+        viewBox="0 0 1536 580"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M-100 390 C150 390 100 230 300 190 S430 100 470 -50"
+          class="wave-line"
+        />
+
+        <path
+          d="M1630 100 C1370 100 1430 280 1300 350 S1200 420 1120 620"
+          class="wave-line"
+        />
+      </svg>
+
+      <div class="hero-content">
+
+        <h1>
+          Find Any
+          <span class="blue-text">GitHub</span>
+          Developer
+        </h1>
+
+        <p class="hero-description">
+          Search for a GitHub username to view their profile,
+          repositories, and activity.
+        </p>
+
+        <!-- SEARCH FORM -->
+        <form class="search-form" id="search-form">
+
+          <div class="input-wrapper">
+            <i data-lucide="user" class="input-icon"></i>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Enter a GitHub username (e.g. octocat)"
+              autocomplete="off"
+              spellcheck="false"
+              aria-label="GitHub username"
+            />
+            <button type="button" id="clear-search-btn" class="search-clear-btn" aria-label="Clear search" hidden>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+
+          <button type="submit" class="search-button" id="search-button">
+            <i data-lucide="search"></i>
+            <span>Search</span>
+          </button>
+
+        </form>
+
+        <p
+          id="search-status"
+          class="search-status"
+          role="status"
+          aria-live="polite"
+        ></p>
+
+        <!-- FEATURE PILLS -->
+        <div class="feature-pills">
+
+          <div class="feature-pill">
+            <i data-lucide="zap"></i>
+            <span>Fast &amp; Secure</span>
+          </div>
+
+          <div class="feature-pill">
+            <i data-lucide="layers"></i>
+            <span>Live GitHub Data</span>
+          </div>
+
+          <div class="feature-pill">
+            <i data-lucide="chart-no-axes-column-increasing"></i>
+            <span>Repositories &amp; Stats</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Profile results / empty-state section -->
+    <section id="profile-results" class="dashboard-main" data-ui-state="idle">
+      <div id="empty-state" class="empty-state">
+        <div class="empty-state-content">
+          <svg class="empty-state-illustration" viewBox="20 6 158 104" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <ellipse cx="94" cy="102" rx="68" ry="8" fill="#06090F" />
+            <rect x="28" y="18" width="124" height="72" rx="10" fill="#161B22" stroke="#6E8098" stroke-width="1.8" />
+            <line x1="28" y1="33" x2="152" y2="33" stroke="#30363D" stroke-width="1.4" />
+            <circle cx="39" cy="25.5" r="1.7" fill="#484F58" />
+            <circle cx="46" cy="25.5" r="1.7" fill="#484F58" />
+            <circle cx="53" cy="25.5" r="1.7" fill="#484F58" />
+            <circle cx="56" cy="59" r="16" fill="#21262D" stroke="#6E8098" stroke-width="1.5" />
+            <g transform="translate(45.7 48.9) scale(0.21)">
+              <path fill-rule="evenodd" clip-rule="evenodd" fill="#8B949E"
+                d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" />
+            </g>
+            <rect x="81" y="48" width="42" height="5" rx="2.5" fill="#484F58" />
+            <rect x="81" y="57.5" width="52" height="4.5" rx="2.25" fill="#30363D" />
+            <rect x="81" y="67" width="32" height="4.5" rx="2.25" fill="#30363D" />
+            <circle cx="132" cy="70" r="17" fill="#0D1117" stroke="#8B949E" stroke-width="2.6" />
+            <circle cx="132" cy="70" r="11" fill="rgba(56, 139, 253, 0.1)" />
+            <line x1="144" y1="82" x2="157" y2="95" stroke="#8B949E" stroke-width="3.2" stroke-linecap="round" />
+            <line x1="154" y1="20" x2="158" y2="9" stroke="#388BFD" stroke-width="2.2" stroke-linecap="round" />
+            <line x1="161" y1="27" x2="171" y2="20" stroke="#388BFD" stroke-width="2.2" stroke-linecap="round" />
+            <line x1="162" y1="36" x2="173" y2="36" stroke="#388BFD" stroke-width="2.2" stroke-linecap="round" />
+          </svg>
+
+          <h2 class="empty-state-title">Search for a GitHub Profile</h2>
+          <p class="empty-state-description">
+            Enter a GitHub username above to view their profile, repositories, contributions, and more.
+          </p>
+
+          <div class="empty-state-examples" role="group" aria-label="Example GitHub usernames">
+            <span class="empty-examples-label">Try examples:</span>
+            <div class="empty-examples-list">
+              <button type="button" class="example-user-btn" data-example-user="octocat">
+                <span>octocat</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </button>
+              <button type="button" class="example-user-btn" data-example-user="google">
+                <span>google</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </button>
+              <button type="button" class="example-user-btn" data-example-user="github">
+                <span>github</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </button>
+              <button type="button" class="example-user-btn" data-example-user="vercel">
+                <span>vercel</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-container" hidden>
+        <div class="dashboard-grid">
+          <!-- Left Column (Unified Single Large Card) -->
+          <div class="dashboard-left-col">
+            <div id="profile-card-container"></div>
+          </div>
+
+          <!-- Right Column (Top Languages, Contributions) -->
+          <div class="dashboard-right-col">
+            <section class="card languages-card" aria-labelledby="languages-heading">
+              <div class="languages-header-info">
+                <h3 id="languages-heading" class="card-title">
+                  <i data-lucide="code-2"></i>
+                  <span>Top Languages</span>
+                </h3>
+                <p id="languages-caption" class="languages-caption">Based on latest 100 repositories</p>
+              </div>
+              <div id="top-languages-container" class="languages-list"></div>
+              <p id="languages-methodology" class="languages-methodology" hidden>Calculated by primary repository language, not byte-level percentages.</p>
+            </section>
+
+            <section class="card contributions-card" aria-labelledby="contributions-heading">
+              <div class="contrib-header-info">
+                <h3 id="contributions-heading" class="card-title">
+                  <i data-lucide="calendar"></i>
+                  <span>Contributions</span>
+                </h3>
+                <p id="contrib-subtitle" class="contrib-subtitle">Activity in current year</p>
+              </div>
+
+              <div class="heatmap-container">
+                <div id="heatmap-months" class="heatmap-months"></div>
+                <div id="heatmap-grid" class="heatmap-grid"></div>
+              </div>
+
+              <div class="heatmap-legend" aria-hidden="true">
+                <span>Less</span>
+                <div class="legend-swatches">
+                  <span class="legend-swatch" style="background-color: var(--contrib-level-0)"></span>
+                  <span class="legend-swatch" style="background-color: var(--contrib-level-1)"></span>
+                  <span class="legend-swatch" style="background-color: var(--contrib-level-2)"></span>
+                  <span class="legend-swatch" style="background-color: var(--contrib-level-3)"></span>
+                  <span class="legend-swatch" style="background-color: var(--contrib-level-4)"></span>
+                </div>
+                <span>More</span>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <a href="#" class="footer-brand" aria-label="GitHub Profile Finder">
+          <i data-lucide="github"></i>
+          <span>GitHub Profile <span class="blue-text">Finder</span></span>
+        </a>
+
+        <span class="footer-divider" aria-hidden="true"></span>
+
+        <p class="footer-tagline">A simple tool to explore GitHub profiles.</p>
+      </div>
+
+      <p class="footer-credit">
+        Made with
+        <svg class="footer-heart" width="15" height="15" viewBox="0 0 24 24" fill="#EF4444" aria-label="love" role="img">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+        by <a href="https://github.com/shoaibkhan-sde" target="_blank" rel="noopener noreferrer" class="footer-author-link">Shoaib</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js?v=5"></script>
+</body>
+</html>
+

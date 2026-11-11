@@ -1,0 +1,223 @@
+:root {
+  /* Exact GitHub Profile Finder — Hero Design Tokens */
+  --bg: #0D1117;
+  --bg-secondary: #161B22;
+
+  --blue: #1F6FEB;
+  --blue-hover: #388BFD;
+
+  --green: #238636;
+  --green-hover: #2EA043;
+
+  --border: #30363D;
+  --text: #F0F6FC;
+  --muted: #C9D1D9;
+
+  --input-bg: #FFFFFF;
+  --input-text: #344054;
+
+  --pill-bg: rgba(22, 27, 34, 0.48);
+  --pill-hover-bg: rgba(22, 27, 34, 0.75);
+  --pill-icon-color: #388BFD;
+  --wave-color: rgba(56, 139, 253, 0.28);
+  --wave-shadow: rgba(56, 139, 253, 0.3);
+
+  /* Legacy & Dashboard Token Compatibility (Dark Default) */
+  --color-hero-bg: var(--bg);
+  --hero-background: #0D1117 radial-gradient(ellipse at 8% 35%, rgba(31, 111, 235, 0.14), transparent 35%) radial-gradient(ellipse at 95% 65%, rgba(31, 111, 235, 0.14), transparent 35%);
+  --color-navbar-bg: var(--bg);
+  --color-navbar-border: #3B434F;
+  --nav-icon-bg: rgba(22, 27, 34, 0.6);
+  --nav-icon-hover-bg: rgba(255, 255, 255, 0.12);
+  --search-form-border: rgba(255, 255, 255, 0.18);
+  --search-form-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35);
+  --search-status-color: #f87171;
+  --color-footer-bg: var(--bg);
+  --color-footer-border: #3B434F;
+  --color-footer-text: #F0F6FC;
+  --color-footer-muted: #C9D1D9;
+  --color-dashboard-bg: #0D1117;
+  --color-idle-bg: #0D1117 radial-gradient(ellipse at 50% 35%, rgba(31, 111, 235, 0.09), transparent 58%);
+
+  --color-action-green: var(--green);
+  --color-action-green-hover: var(--green-hover);
+  --color-action-green-active: #1f752e;
+  --color-action-green-shadow: rgba(35, 134, 54, 0.28);
+
+  --color-primary: var(--blue);
+  --color-primary-light: var(--blue-hover);
+  --color-primary-dark: #1a56b8;
+  --color-primary-subtle: rgba(56, 139, 253, 0.15);
+  --color-primary-glow: rgba(31, 111, 235, 0.25);
+
+  --color-slate-950: #020617;
+  --color-slate-900: #0f172a;
+  --color-slate-800: #1e293b;
+  --color-slate-700: #334155;
+  --color-slate-600: #475569;
+  --color-slate-500: #64748b;
+  --color-slate-400: #94a3b8;
+  --color-slate-300: #cbd5e1;
+  --color-slate-200: #e2e8f0;
+  --color-slate-100: #f1f5f9;
+  --color-slate-50: #f8fafc;
+  --color-white: #ffffff;
+
+  /* Semantic Surface & Text Tokens (GitHub Dark Primer default) */
+  --surface-subtle: #21262D;
+  --surface-hover: #30363D;
+  --surface-muted: #1F242C;
+  --surface-tab-hover: rgba(255, 255, 255, 0.06);
+  --text-primary: #F0F6FC;
+  --text-secondary: #C9D1D9;
+  --text-muted: #9EA7B3;
+  --text-subtle: #8B949E;
+  --text-faint: #8B949E;
+  --link-color: #58A6FF;
+  --repo-title-color: #58A6FF;
+  --avatar-bg: #161B22;
+  --avatar-border: #30363D;
+  --example-btn-bg: rgba(22, 27, 34, 0.82);
+  --example-btn-border: #3D444D;
+  --example-btn-hover-bg: rgba(31, 111, 235, 0.14);
+
+  /* 4 Stat Card Colors (Dark Mode) */
+  --stat-followers-bg: rgba(56, 139, 253, 0.14);
+  --stat-followers-text: #58A6FF;
+  --stat-following-bg: rgba(56, 189, 248, 0.14);
+  --stat-following-text: #38BDF8;
+  --stat-repos-bg: rgba(63, 185, 80, 0.14);
+  --stat-repos-text: #3FB950;
+  --stat-stars-bg: rgba(210, 153, 34, 0.16);
+  --stat-stars-text: #E3B341;
+
+  /* GitHub Dark Contribution Green Scale */
+  --contrib-level-0: #21262D;
+  --contrib-level-1: #0E4429;
+  --contrib-level-2: #006D32;
+  --contrib-level-3: #26A641;
+  --contrib-level-4: #39D353;
+
+  /* Card & Surface Tokens */
+  --card-bg: #161B22;
+  --repo-card-bg: #0D1117;
+  --card-border: #30363D;
+  --card-hover-border: #484F58;
+  --card-radius-lg: 8px;
+  --card-radius-md: 6px;
+  --card-radius-sm: 6px;
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.35), 0 1px 2px -1px rgba(0, 0, 0, 0.25);
+  --card-shadow-hover: 0 4px 10px -1px rgba(0, 0, 0, 0.45), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+
+  /* Typography Stack */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+/* Explicit Dark Theme (mirrors :root defaults) */
+[data-theme="dark"] {
+  --bg: #0D1117;
+  --bg-secondary: #161B22;
+  --border: #30363D;
+  --text: #F0F6FC;
+  --muted: #C9D1D9;
+  --pill-bg: rgba(22, 27, 34, 0.48);
+  --pill-hover-bg: rgba(22, 27, 34, 0.75);
+  --pill-icon-color: #388BFD;
+  --wave-color: rgba(56, 139, 253, 0.28);
+  --wave-shadow: rgba(56, 139, 253, 0.3);
+  --color-hero-bg: #0D1117;
+  --hero-background: #0D1117 radial-gradient(ellipse at 8% 35%, rgba(31, 111, 235, 0.14), transparent 35%) radial-gradient(ellipse at 95% 65%, rgba(31, 111, 235, 0.14), transparent 35%);
+  --color-navbar-bg: #0D1117;
+  --color-navbar-border: #3B434F;
+  --nav-icon-bg: rgba(22, 27, 34, 0.6);
+  --nav-icon-hover-bg: rgba(255, 255, 255, 0.12);
+  --search-form-border: rgba(255, 255, 255, 0.18);
+  --search-form-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35);
+  --search-status-color: #f87171;
+  --color-dashboard-bg: #0D1117;
+  --color-idle-bg: #0D1117 radial-gradient(ellipse at 50% 35%, rgba(31, 111, 235, 0.09), transparent 58%);
+  --color-footer-bg: #0D1117;
+  --color-footer-border: #3B434F;
+  --color-footer-text: #F0F6FC;
+  --color-footer-muted: #C9D1D9;
+  --card-bg: #161B22;
+  --repo-card-bg: #0D1117;
+  --card-border: #30363D;
+  --card-hover-border: #484F58;
+}
+
+/* Light Theme */
+body.light,
+[data-theme="light"] {
+  --bg: #FFFFFF;
+  --bg-secondary: #F6F8FA;
+  --border: #D0D7DE;
+  --text: #0F172A;
+  --muted: #475569;
+  --pill-bg: rgba(248, 250, 252, 0.95);
+  --pill-hover-bg: #EFF6FF;
+  --pill-icon-color: #1F6FEB;
+  --wave-color: rgba(31, 111, 235, 0.22);
+  --wave-shadow: rgba(31, 111, 235, 0.14);
+  --color-hero-bg: #FFFFFF;
+  --hero-background: #FFFFFF radial-gradient(ellipse at 8% 35%, rgba(31, 111, 235, 0.08), transparent 38%) radial-gradient(ellipse at 95% 65%, rgba(31, 111, 235, 0.08), transparent 38%);
+  --color-navbar-bg: #FFFFFF;
+  --color-navbar-border: #D0D7DE;
+  --nav-icon-bg: #F6F8FA;
+  --nav-icon-hover-bg: #EFF6FF;
+  --search-form-border: #D0D7DE;
+  --search-form-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.06);
+  --search-status-color: #dc2626;
+  --color-dashboard-bg: #F8FAFC;
+  --color-idle-bg: #F6F8FA radial-gradient(ellipse at 50% 35%, rgba(31, 111, 235, 0.06), transparent 58%);
+  --color-footer-bg: #FFFFFF;
+  --color-footer-border: #D0D7DE;
+  --color-footer-text: #1F2328;
+  --color-footer-muted: #57606A;
+  --color-primary-subtle: #eff6ff;
+  --color-primary-dark: #1a56b8;
+
+  --surface-subtle: #F1F5F9;
+  --surface-hover: #E2E8F0;
+  --surface-muted: #F8FAFC;
+  --surface-tab-hover: rgba(0, 0, 0, 0.03);
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #475569;
+  --text-subtle: #64748B;
+  --text-faint: #94A3B8;
+  --link-color: #1F6FEB;
+  --repo-title-color: #4338CA;
+  --avatar-bg: #E0F2FE;
+  --avatar-border: #BAE6FD;
+  --example-btn-bg: #FFFFFF;
+  --example-btn-border: #D0D7DE;
+  --example-btn-hover-bg: #EFF6FF;
+
+  --stat-followers-bg: #eff6ff;
+  --stat-followers-text: #1f6feb;
+  --stat-following-bg: #e0f2fe;
+  --stat-following-text: #0284c7;
+  --stat-repos-bg: #dcfce7;
+  --stat-repos-text: #16a34a;
+  --stat-stars-bg: #fef3c7;
+  --stat-stars-text: #d97706;
+
+  --contrib-level-0: #ebedf0;
+  --contrib-level-1: #9be9a8;
+  --contrib-level-2: #40c463;
+  --contrib-level-3: #30a14e;
+  --contrib-level-4: #216e39;
+
+  --card-bg: #FFFFFF;
+  --repo-card-bg: #FFFFFF;
+  --card-border: #D0D7DE;
+  --card-hover-border: #CBD5E1;
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  --card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}

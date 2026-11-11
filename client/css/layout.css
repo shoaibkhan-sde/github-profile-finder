@@ -1,0 +1,546 @@
+/* ==========================================================================
+   Responsive Grid & Page Layouts — Zero-Scroll Desktop & Mobile Ready
+   ========================================================================== */
+
+/* Main Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 560px;
+  gap: 20px;
+  align-items: start;
+}
+
+.dashboard-grid[data-active-tab="repositories"],
+.dashboard-grid[data-active-tab="stars"] {
+  grid-template-columns: minmax(520px, 560px) 1fr;
+}
+
+@media (min-width: 1261px) {
+  .dashboard-grid[data-active-tab="repositories"] .stats-grid,
+  .dashboard-grid[data-active-tab="stars"] .stats-grid {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 0.85fr) minmax(0, 1.08fr) minmax(0, 1.54fr);
+    gap: 7px;
+  }
+
+  .dashboard-grid[data-active-tab="repositories"] .stat-card,
+  .dashboard-grid[data-active-tab="stars"] .stat-card {
+    padding: 6px 9px;
+    gap: 6px;
+  }
+
+  .dashboard-grid[data-active-tab="repositories"] .stat-icon,
+  .dashboard-grid[data-active-tab="stars"] .stat-icon {
+    width: 17px;
+    height: 17px;
+  }
+
+  .dashboard-grid[data-active-tab="repositories"] .stat-value,
+  .dashboard-grid[data-active-tab="stars"] .stat-value {
+    font-size: 1.06rem;
+  }
+
+  .dashboard-grid[data-active-tab="repositories"] .stat-label,
+  .dashboard-grid[data-active-tab="stars"] .stat-label {
+    font-size: 0.7rem;
+  }
+}
+
+.dashboard-left-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Prevents flex/grid blowout */
+}
+
+.dashboard-grid[data-active-tab="repositories"] .dashboard-left-col,
+.dashboard-grid[data-active-tab="stars"] .dashboard-left-col {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+}
+
+.dashboard-right-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.overview-right-panel:not([hidden]),
+.explorer-right-panel:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+
+/* ==========================================================================
+   Accessibility Focus States
+   ========================================================================== */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Explicitly prevent inner input from inheriting outer focus outline (Fixes Image 3) */
+.search-input:focus,
+.search-input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: 8px 16px;
+  border-radius: var(--card-radius-sm);
+  z-index: 100;
+  font-weight: 600;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints & Screen Ratios
+   ========================================================================== */
+
+/* Compact Desktops / Laptops (1260px and down) */
+@media (max-width: 1260px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr 500px;
+  }
+
+  .dashboard-grid[data-active-tab="repositories"],
+  .dashboard-grid[data-active-tab="stars"] {
+    grid-template-columns: minmax(420px, 460px) 1fr;
+  }
+
+  .dashboard-grid[data-active-tab="repositories"] .stats-grid,
+  .dashboard-grid[data-active-tab="stars"] .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+/* Large Tablets & Small Laptops (1080px and down) */
+@media (max-width: 1080px) {
+  .dashboard-grid,
+  .dashboard-grid[data-active-tab="overview"],
+  .dashboard-grid[data-active-tab="repositories"],
+  .dashboard-grid[data-active-tab="stars"] {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .dashboard-grid[data-active-tab="repositories"] .dashboard-left-col,
+  .dashboard-grid[data-active-tab="stars"] .dashboard-left-col {
+    position: static;
+    top: auto;
+  }
+
+  .dashboard-grid[data-active-tab="repositories"] .stats-grid,
+  .dashboard-grid[data-active-tab="stars"] .stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.25fr);
+  }
+
+  .overview-right-panel:not([hidden]) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .contributions-card {
+    margin-top: 0;
+  }
+}
+
+/* Tablets (860px and down) */
+@media (max-width: 860px) {
+  .stats-grid,
+  .dashboard-grid[data-active-tab="repositories"] .stats-grid,
+  .dashboard-grid[data-active-tab="stars"] .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+/* Mobile Devices & Small Tablets (768px and down) */
+@media (max-width: 768px) {
+  .navbar,
+  .site-header {
+    height: 56px;
+  }
+
+  .navbar-container {
+    padding: 0 16px;
+    height: 56px;
+  }
+
+  .nav-menu {
+    display: none; /* Hide desktop nav links on mobile */
+  }
+
+  .brand-link {
+    font-size: 1rem;
+  }
+
+  .navbar-right {
+    gap: 12px;
+  }
+
+  .hero,
+  .hero-section {
+    padding: 22px 16px 48px 16px;
+  }
+
+  .hero-headline {
+    font-size: clamp(1.75rem, 5.5vw, 2.1rem);
+  }
+
+  .hero-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+  }
+
+  .hero-features {
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .feature-pill {
+    padding: 4px 12px;
+    font-size: 0.725rem;
+  }
+
+  .dashboard-main {
+    padding: 16px 16px 36px 16px;
+  }
+
+  .overview-right-panel:not([hidden]) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .contributions-card {
+    margin-top: 0;
+  }
+
+  .explorer-card {
+    padding: 16px 14px;
+  }
+
+  .explorer-header-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .explorer-search-wrapper {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .explorer-controls-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .explorer-filter-group {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    max-width: 100%;
+    padding-bottom: 2px;
+  }
+
+  .explorer-filter-group::-webkit-scrollbar {
+    display: none;
+  }
+
+  .explorer-filter-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .explorer-sort-wrap {
+    align-self: flex-start;
+  }
+
+  .explorer-pagination {
+    gap: 4px;
+  }
+
+  .page-btn {
+    min-width: 30px;
+    height: 30px;
+    font-size: 0.775rem;
+  }
+
+  .page-btn-nav {
+    padding: 0 9px;
+  }
+}
+
+/* Compact Smartphones (640px and down) */
+@media (max-width: 640px) {
+  .dashboard-main {
+    padding: 14px 12px 32px 12px;
+  }
+
+  .profile-unified-card {
+    padding: 16px 14px;
+  }
+
+  .profile-header {
+    gap: 14px;
+  }
+
+  .avatar-img {
+    width: 68px;
+    height: 68px;
+  }
+
+  .username-heading {
+    font-size: 1.25rem;
+  }
+
+  .profile-headline-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .btn-icon-link {
+    width: 26px;
+    height: 26px;
+  }
+
+  .profile-meta-row {
+    gap: 8px 12px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 14px;
+    padding-top: 14px;
+  }
+
+  .stat-card {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .stat-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .stat-value {
+    font-size: 1.05rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+  }
+
+  .tabs-nav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 6px;
+    padding-bottom: 2px;
+  }
+
+  .tabs-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .repos-section {
+    margin-top: 12px;
+  }
+
+  .repo-card {
+    padding: 10px 12px;
+  }
+
+  .repo-card-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .dashboard-container,
+  .dashboard-grid,
+  .overview-right-panel,
+  .languages-card,
+  .contributions-card {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .languages-card {
+    padding: 16px 14px;
+  }
+
+  .language-item {
+    grid-template-columns: minmax(70px, 90px) 1fr 38px;
+    gap: 8px;
+  }
+
+  .contributions-card {
+    padding: 16px 14px;
+  }
+
+  .heatmap-months {
+    font-size: 0.65rem;
+  }
+
+  .heatmap-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .heatmap-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .heatmap-months,
+  .heatmap-grid {
+    min-width: 490px;
+  }
+
+  .heatmap-legend {
+    font-size: 0.685rem;
+  }
+
+  .site-footer {
+    height: auto;
+    padding: 12px 0;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    padding: 0 16px;
+  }
+
+  .footer-left {
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .footer-divider {
+    display: none;
+  }
+
+  .footer-tagline {
+    white-space: normal;
+  }
+
+  .dashboard-main[data-ui-state="idle"] {
+    padding: 24px 16px 32px;
+  }
+
+  .empty-state-illustration {
+    width: 148px;
+  }
+
+  .empty-state-title {
+    font-size: 1.3rem;
+  }
+
+  .empty-state-description {
+    font-size: 0.85rem;
+  }
+}
+
+/* Ultra-Compact Screens (480px and down — Fixes Image 4 Mobile Navbar Pill & Stretched Button) */
+@media (max-width: 480px) {
+  .brand-link {
+    font-size: 0.925rem;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  .brand-link svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .navbar-right {
+    gap: 8px;
+  }
+
+  .btn-get-started {
+    height: 28px;
+    padding: 0 12px;
+    font-size: 0.75rem;
+    border-radius: 9999px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .theme-toggle-btn {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+
+  .hero-headline {
+    font-size: 1.55rem;
+  }
+
+  .search-form {
+    padding: 4px 4px 4px 12px;
+    gap: 6px;
+    min-height: 46px;
+  }
+
+  .search-input-wrapper,
+  .input-wrapper {
+    gap: 7px;
+  }
+
+  .search-icon,
+  .input-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .search-input {
+    font-size: 0.85rem;
+    padding: 8px 4px 8px 0;
+  }
+
+  .search-button,
+  .btn-search {
+    padding: 8px 12px;
+    gap: 5px;
+    font-size: 0.8rem;
+  }
+
+  .stat-tooltip {
+    min-width: 170px;
+    max-width: 210px;
+    right: 0;
+  }
+}

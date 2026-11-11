@@ -1,0 +1,36 @@
+# Node & Package Managers
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+
+# Environment & Secrets (NEVER COMMIT)
+.env
+.env.local
+.env.production
+.env.development
+*.pem
+*.key
+
+# Test & Coverage Outputs
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build & Logs
+dist/
+build/
+logs/
+*.log
+

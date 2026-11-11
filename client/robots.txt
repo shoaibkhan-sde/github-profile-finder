@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://github-profile-finder.example.com/sitemap.xml
+

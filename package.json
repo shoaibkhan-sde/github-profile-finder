@@ -1,0 +1,37 @@
+{
+  "name": "github-profile-finder",
+  "version": "1.0.0",
+  "description": "Production-ready GitHub Profile Finder web application with high visual fidelity, secure API proxy, caching, and accessibility.",
+  "type": "module",
+  "scripts": {
+    "preview": "node scripts/preview.js",
+    "start": "node server/src/server.js",
+    "dev": "node server/src/server.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0"
+  },
+  "keywords": [
+    "github",
+    "profile-finder",
+    "vanilla-js",
+    "express",
+    "vitest",
+    "playwright"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "supertest": "^7.3.2",
+    "vitest": "^5.1.0"
+  }
+}

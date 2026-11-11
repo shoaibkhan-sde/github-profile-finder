@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>GitHub Profile Finder — Search Profiles, Repositories & Stats</title>
+  <meta name="description"
+    content="Find any GitHub developer. Search for a GitHub username to view verified profile details, public repositories, language distribution, and activity statistics.">
+  <meta name="theme-color" content="#0D1117">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/github-profile-finder-favicon.png">
+  <link rel="apple-touch-icon" href="/github-profile-finder-favicon.png">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GitHub Profile Finder — Search Profiles, Repositories & Stats">
+  <meta property="og:description"
+    content="Inspect public GitHub profile information, repositories, stars, forks, and language statistics using official GitHub data.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Modular Stylesheets -->
+  <link rel="stylesheet" href="./css/variables.css?v=20">
+  <link rel="stylesheet" href="./css/reset.css?v=20">
+  <link rel="stylesheet" href="./css/typography.css?v=20">
+  <link rel="stylesheet" href="./css/components.css?v=20">
+  <link rel="stylesheet" href="./css/layout.css?v=20">
+  <link rel="stylesheet" href="./css/animations.css?v=20">
+</head>
+
+<body>
+  <!-- Keyboard Accessibility Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar site-header">
+    <div class="nav-container navbar-container">
+      <a href="./index.html" class="brand brand-link" aria-label="GitHub Profile Finder home">
+        <!-- Octocat SVG Icon -->
+        <svg class="brand-icon" viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" />
+        </svg>
+        <span>
+          GitHub Profile <span class="blue-text brand-accent">Finder</span>
+        </span>
+      </a>
+
+      <!-- Right Actions: Theme Toggle & Shoaib Khan's GitHub Profile Link -->
+      <div class="nav-actions">
+        <button class="icon-button nav-icon-btn" id="theme-toggle" aria-label="Toggle light and dark theme" title="Toggle theme">
+          <svg id="theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <a href="https://github.com/shoaibkhan-sde" target="_blank" rel="noopener noreferrer" class="icon-button nav-icon-btn github-link" aria-label="Visit GitHub" title="Shoaib Khan on GitHub">
+          <svg width="18" height="18" viewBox="0 0 98 96" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main id="main-content">
+    <!-- HERO SECTION -->
+    <section class="hero hero-section" id="home">
+      <!-- Decorative curved background lines exactly matching specification -->
+      <svg class="hero-waves" viewBox="0 0 1536 580" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-100 390 C150 390 100 230 300 190 S430 100 470 -50" class="wave-line" />
+        <path d="M1630 100 C1370 100 1430 280 1300 350 S1200 420 1120 620" class="wave-line" />
+      </svg>
+
+      <div class="hero-content">
+        <h1 class="hero-headline">
+          Find Any <span class="blue-text highlight">GitHub</span> Developer
+        </h1>
+
+        <p class="hero-description hero-subtitle">
+          Search for a GitHub username to view their profile, repositories, and activity.
+        </p>
+
+        <!-- SEARCH FORM -->
+        <div class="search-container-relative">
+          <form class="search-form" id="search-form" role="search" aria-label="Search GitHub users">
+            <div class="input-wrapper search-input-wrapper">
+              <svg class="input-icon search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+
+              <label for="username" class="sr-only"
+                style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">
+                Enter GitHub username
+              </label>
+
+              <input
+                type="text"
+                id="username"
+                name="username"
+                class="search-input"
+                placeholder="Enter a GitHub username (e.g. octocat)"
+                autocomplete="off"
+                spellcheck="false"
+                aria-label="GitHub username"
+              />
+
+              <button type="button" id="clear-search-btn" class="search-clear-btn" aria-label="Clear search" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+
+            <button type="submit" class="search-button btn-search" id="search-button" aria-label="Submit search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <span>Search</span>
+            </button>
+          </form>
+
+          <!-- Search History Dropdown Container -->
+          <div id="history-dropdown" class="history-dropdown" aria-label="Recent Searches"></div>
+        </div>
+
+        <p id="search-status" class="search-status" role="status" aria-live="polite"></p>
+
+        <!-- Accessible Live Announcer -->
+        <div id="live-announcer" class="sr-only"
+          style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;"
+          aria-live="polite"></div>
+
+        <!-- FEATURE PILLS -->
+        <div class="feature-pills hero-features" id="features">
+          <div class="feature-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            <span>Fast &amp; Secure</span>
+          </div>
+
+          <div class="feature-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+            <span>Live GitHub Data</span>
+          </div>
+
+          <div class="feature-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            <span>Repositories &amp; Stats</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD / EMPTY-STATE RESULTS SECTION -->
+    <section class="dashboard-main" id="profile-results" data-ui-state="idle">
+      <!-- Idle Empty State -->
+      <div id="empty-state" class="empty-state">
+        <div class="empty-state-content">
+          <svg class="empty-state-illustration" viewBox="20 6 158 104" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <ellipse cx="94" cy="102" rx="68" ry="8" fill="#06090F" />
+            <rect x="28" y="18" width="124" height="72" rx="10" fill="#161B22" stroke="#6E8098" stroke-width="1.8" />
+            <line x1="28" y1="33" x2="152" y2="33" stroke="#30363D" stroke-width="1.4" />
+            <circle cx="39" cy="25.5" r="1.7" fill="#484F58" />
+            <circle cx="46" cy="25.5" r="1.7" fill="#484F58" />
+            <circle cx="53" cy="25.5" r="1.7" fill="#484F58" />
+            <circle cx="56" cy="59" r="16" fill="#21262D" stroke="#6E8098" stroke-width="1.5" />
+            <g transform="translate(45.7 48.9) scale(0.21)">
+              <path fill-rule="evenodd" clip-rule="evenodd" fill="#8B949E"
+                d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" />
+            </g>
+            <rect x="81" y="48" width="42" height="5" rx="2.5" fill="#484F58" />
+            <rect x="81" y="57.5" width="52" height="4.5" rx="2.25" fill="#30363D" />
+            <rect x="81" y="67" width="32" height="4.5" rx="2.25" fill="#30363D" />
+            <circle cx="132" cy="70" r="17" fill="#0D1117" stroke="#8B949E" stroke-width="2.6" />
+            <circle cx="132" cy="70" r="11" fill="rgba(56, 139, 253, 0.1)" />
+            <line x1="144" y1="82" x2="157" y2="95" stroke="#8B949E" stroke-width="3.2" stroke-linecap="round" />
+            <line x1="154" y1="20" x2="158" y2="9" stroke="#388BFD" stroke-width="2.2" stroke-linecap="round" />
+            <line x1="161" y1="27" x2="171" y2="20" stroke="#388BFD" stroke-width="2.2" stroke-linecap="round" />
+            <line x1="162" y1="36" x2="173" y2="36" stroke="#388BFD" stroke-width="2.2" stroke-linecap="round" />
+          </svg>
+
+          <h2 class="empty-state-title">Search for a GitHub Profile</h2>
+          <p class="empty-state-description">
+            Enter a GitHub username above to view their profile, repositories, contributions, and more.
+          </p>
+
+          <div class="empty-state-examples" role="group" aria-label="Example GitHub usernames">
+            <span class="empty-examples-label">Try examples:</span>
+            <div class="empty-examples-list">
+              <button type="button" class="example-user-btn" data-example-user="octocat">
+                <span>octocat</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </button>
+              <button type="button" class="example-user-btn" data-example-user="google">
+                <span>google</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </button>
+              <button type="button" class="example-user-btn" data-example-user="github">
+                <span>github</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </button>
+              <button type="button" class="example-user-btn" data-example-user="vercel">
+                <span>vercel</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-container" hidden>
+        <div class="dashboard-grid" id="dashboard-grid" data-active-tab="overview">
+          <!-- Left Column (Unified Single Large Card: Profile + Stats + Tabs + Top 3 Popular Repositories) -->
+          <div class="dashboard-left-col">
+            <div id="profile-card-container"></div>
+          </div>
+
+          <!-- Right Column (Overview: Top Languages + Contributions; Repositories/Stars: Dynamic Explorer) -->
+          <div class="dashboard-right-col">
+            <div id="overview-right-panel" class="overview-right-panel">
+              <!-- Top Languages Card -->
+              <section class="card languages-card" aria-labelledby="languages-heading">
+              <div class="languages-header-info">
+                <h3 id="languages-heading" class="card-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                  </svg>
+                  <span>Top Languages</span>
+                </h3>
+                <p id="languages-caption" class="languages-caption">Based on latest 100 repositories</p>
+              </div>
+              <div id="top-languages-container" class="languages-list"></div>
+              <p id="languages-methodology" class="languages-methodology" hidden>Calculated by primary repository language, not byte-level percentages.</p>
+            </section>
+
+            <!-- Contributions Card -->
+            <section class="card contributions-card" aria-labelledby="contributions-heading">
+              <div class="contrib-header-info">
+                <h3 id="contributions-heading" class="card-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                  <span>Contributions</span>
+                </h3>
+                <p id="contrib-subtitle" class="contrib-subtitle">Activity in current year</p>
+              </div>
+
+              <!-- Heatmap Month Headers & Grid -->
+              <div class="heatmap-container">
+                <div id="heatmap-months" class="heatmap-months"></div>
+                <div id="heatmap-grid" class="heatmap-grid"></div>
+              </div>
+
+              <!-- Heatmap Legend -->
+              <div class="heatmap-legend" aria-hidden="true">
+                <span>Less</span>
+                <div class="legend-swatches">
+                  <span class="legend-swatch" style="background-color: var(--contrib-level-0)"></span>
+                  <span class="legend-swatch" style="background-color: var(--contrib-level-1)"></span>
+                  <span class="legend-swatch" style="background-color: var(--contrib-level-2)"></span>
+                  <span class="legend-swatch" style="background-color: var(--contrib-level-3)"></span>
+                  <span class="legend-swatch" style="background-color: var(--contrib-level-4)"></span>
+                </div>
+                <span>More</span>
+              </div>
+            </section>
+            </div>
+
+            <!-- Dynamic Repository / Starred Explorer Panel -->
+            <div id="explorer-right-panel" class="explorer-right-panel" hidden></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <a href="./index.html" class="footer-brand" aria-label="GitHub Profile Finder">
+          <!-- Octocat SVG Icon -->
+          <svg width="20" height="20" viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" />
+          </svg>
+          <span>GitHub Profile <span class="blue-text brand-accent">Finder</span></span>
+        </a>
+
+        <span class="footer-divider" aria-hidden="true"></span>
+
+        <p class="footer-tagline">A simple tool to explore GitHub profiles.</p>
+      </div>
+
+      <p class="footer-credit">
+        <span>Made with</span>
+        <svg class="footer-heart" width="15" height="15" viewBox="0 0 24 24" fill="#EF4444" aria-label="love" role="img">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+        <span>by <a href="https://github.com/shoaibkhan-sde" target="_blank" rel="noopener noreferrer" class="footer-author-link">Shoaib</a></span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- App Entry Point Module -->
+  <script type="module" src="./js/app.js?v=14"></script>
+</body>
+
+</html>
