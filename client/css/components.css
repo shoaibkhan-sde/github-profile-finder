@@ -1079,8 +1079,12 @@ h2.empty-state-title,
 
 .language-empty-msg,
 .contrib-empty-msg {
-  padding: 14px 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 8px;
   text-align: center;
+  white-space: normal;
+  overflow-wrap: break-word;
   color: var(--text-faint);
   font-size: 0.8rem;
 }
@@ -1379,8 +1383,19 @@ h2.empty-state-title,
   user-select: none;
 }
 
+.heatmap-container.is-empty,
+.heatmap-container:has(.heatmap-grid.is-empty) {
+  overflow-x: hidden;
+}
+
+.heatmap-months:empty {
+  display: none;
+}
+
 .heatmap-grid.is-empty {
   display: block;
+  width: 100%;
+  min-width: 0;
 }
 
 .heatmap-cell {

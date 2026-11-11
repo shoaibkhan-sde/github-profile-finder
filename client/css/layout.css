@@ -419,9 +419,20 @@
     display: none;
   }
 
-  .heatmap-months,
-  .heatmap-grid {
+  .heatmap-container.is-empty,
+  .heatmap-container:has(.heatmap-grid.is-empty) {
+    overflow-x: hidden;
+  }
+
+  .heatmap-months:not(:empty),
+  .heatmap-grid:not(.is-empty):not(:has(.heatmap-skeleton)) {
     min-width: 490px;
+  }
+
+  .heatmap-months:empty,
+  .heatmap-grid.is-empty {
+    min-width: 0;
+    width: 100%;
   }
 
   .heatmap-legend {

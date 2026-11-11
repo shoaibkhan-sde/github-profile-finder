@@ -27,7 +27,7 @@ import {
   getExplorerPaginationInfo,
   syncUiState,
   announce
-} from './dom.js?v=11';
+} from './dom.js?v=12';
 
 let explorerSearchTimer = null;
 

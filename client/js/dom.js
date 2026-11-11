@@ -94,7 +94,11 @@ export function syncUiState(uiState = 'idle') {
     if (profileContainer) profileContainer.innerHTML = '';
     if (langContainer) langContainer.innerHTML = '';
     if (heatmapMonths) heatmapMonths.innerHTML = '';
-    if (heatmapGrid) heatmapGrid.innerHTML = '';
+    if (heatmapGrid) {
+      heatmapGrid.innerHTML = '';
+      heatmapGrid.classList.remove('is-empty');
+      heatmapGrid.closest('.heatmap-container')?.classList.remove('is-empty');
+    }
     if (contribSubtitle) contribSubtitle.textContent = '';
     if (dashboardGrid) dashboardGrid.dataset.activeTab = 'overview';
     if (overviewRightPanel) overviewRightPanel.hidden = false;
@@ -1149,6 +1153,7 @@ export function renderContributions(contribData = {}) {
   if (weeks.length === 0) {
     grid.style.removeProperty('--heatmap-cols');
     grid.classList.add('is-empty');
+    grid.closest('.heatmap-container')?.classList.add('is-empty');
     const emptyMsg = document.createElement('p');
     emptyMsg.className = 'contrib-empty-msg';
     emptyMsg.textContent = contribData?.live === false
@@ -1159,6 +1164,7 @@ export function renderContributions(contribData = {}) {
   }
 
   grid.classList.remove('is-empty');
+  grid.closest('.heatmap-container')?.classList.remove('is-empty');
   const colCount = weeks.length;
   grid.style.setProperty('--heatmap-cols', String(colCount));
 
@@ -1291,6 +1297,8 @@ export function renderLoadingSkeleton() {
   if (heatmapMonths) heatmapMonths.innerHTML = '';
   const heatmapGrid = document.getElementById('heatmap-grid');
   if (heatmapGrid) {
+    heatmapGrid.classList.remove('is-empty');
+    heatmapGrid.closest('.heatmap-container')?.classList.remove('is-empty');
     heatmapGrid.innerHTML = '<div class="skeleton heatmap-skeleton"></div>';
   }
 }

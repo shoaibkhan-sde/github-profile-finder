@@ -466,6 +466,60 @@ describe('Rate-Limit Behavior, Security Controls & Client Resilience', () => {
       expect(starSpan.innerHTML).toBe('');
       expect(starSpan.textContent).toBe('<img src=x onerror=alert(1)>');
     });
+
+    it('marks both heatmap container and grid as is-empty when contributions are unavailable, and clears on valid weeks', async () => {
+      const { renderContributions } = await import('../../../client/js/dom.js');
+
+      function makeClassList() {
+        const set = new Set();
+        return {
+          add: (...cls) => cls.forEach((c) => set.add(c)),
+          remove: (...cls) => cls.forEach((c) => set.delete(c)),
+          toggle: (c, force) => (force ? set.add(c) : set.delete(c)),
+          contains: (c) => set.has(c)
+        };
+      }
+
+      const containerEl = { classList: makeClassList() };
+      const monthsRow = { innerHTML: '', style: { setProperty: () => {} }, appendChild: () => {} };
+      const children = [];
+      const gridEl = {
+        innerHTML: '',
+        classList: makeClassList(),
+        style: { setProperty: () => {}, removeProperty: () => {} },
+        closest: (sel) => (sel === '.heatmap-container' ? containerEl : null),
+        appendChild: (node) => children.push(node)
+      };
+      const subtitleEl = { textContent: '' };
+
+      global.document = {
+        getElementById: (id) => {
+          if (id === 'heatmap-grid') return gridEl;
+          if (id === 'heatmap-months') return monthsRow;
+          if (id === 'contrib-subtitle') return subtitleEl;
+          return null;
+        },
+        createElement: (tag) => {
+          const el = new TestElement(tag);
+          el.classList = makeClassList();
+          return el;
+        }
+      };
+
+      renderContributions({ totalContributions: 0, live: false, weeks: [] });
+      expect(gridEl.classList.contains('is-empty')).toBe(true);
+      expect(containerEl.classList.contains('is-empty')).toBe(true);
+      expect(children.at(-1).textContent).toBe('Contribution calendar temporarily unavailable.');
+
+      renderContributions({
+        totalContributions: 3,
+        year: 2026,
+        live: true,
+        weeks: [{ contributionDays: [{ date: '2026-01-01', contributionCount: 3, level: 2 }] }]
+      });
+      expect(gridEl.classList.contains('is-empty')).toBe(false);
+      expect(containerEl.classList.contains('is-empty')).toBe(false);
+    });
   });
 });
 
