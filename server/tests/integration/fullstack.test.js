@@ -16,6 +16,8 @@ describe('Full-Stack Static & Routing Integration', () => {
     expect(res.text).toContain('<link rel="icon" type="image/png" href="/github-profile-finder-favicon.png">');
     expect(res.text).toContain('<link rel="apple-touch-icon" href="/github-profile-finder-favicon.png">');
     expect(res.text).toContain('<meta name="google-site-verification" content="Vp1D6d2-UePtuTK1XZVRsgzpGIoD4wt6oz1TYJhOyvs" />');
+    expect(res.text).toContain('<link rel="canonical" href="https://github-profile-finder-api.onrender.com/" />');
+    expect(res.text).not.toContain('href="./index.html"');
   });
 
   it('serves favicon.ico and github-profile-finder-favicon.png from the public directory', async () => {
