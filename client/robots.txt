@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://github-profile-finder.example.com/sitemap.xml
-
+Sitemap: https://github-profile-finder-api.onrender.com/sitemap.xml

@@ -28,6 +28,22 @@ describe('Full-Stack Static & Routing Integration', () => {
     expect(pngRes.headers['content-type']).toContain('image/png');
   });
 
+  it('serves valid sitemap.xml and robots.txt pointing to the production URL', async () => {
+    const sitemapRes = await request(app).get('/sitemap.xml');
+    expect(sitemapRes.status).toBe(200);
+    expect(sitemapRes.headers['content-type']).toMatch(/xml/);
+    expect(sitemapRes.text).toContain('xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"');
+    expect(sitemapRes.text).toContain('<loc>https://github-profile-finder-api.onrender.com/</loc>');
+    expect(sitemapRes.text).not.toContain('example.com');
+
+    const robotsRes = await request(app).get('/robots.txt');
+    expect(robotsRes.status).toBe(200);
+    expect(robotsRes.headers['content-type']).toContain('text/plain');
+    expect(robotsRes.text).toContain('User-agent: *');
+    expect(robotsRes.text).toContain('Allow: /');
+    expect(robotsRes.text).toContain('Sitemap: https://github-profile-finder-api.onrender.com/sitemap.xml');
+  });
+
   it('serves CSS stylesheets', async () => {
     const res = await request(app).get('/css/components.css');
     expect(res.status).toBe(200);
