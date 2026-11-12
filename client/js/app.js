@@ -27,7 +27,7 @@ import {
   getExplorerPaginationInfo,
   syncUiState,
   announce
-} from './dom.js?v=12';
+} from './dom.js?v=13';
 
 let explorerSearchTimer = null;
 
@@ -164,7 +164,7 @@ export async function handleSearch(username, { forceRefresh = false } = {}) {
     // Render unified left card and right column cards
     renderProfileCard(state.currentData.user, state.currentData.repositories, state.activeTab, state.repoSort);
     renderTopLanguages(state.currentData.top_languages, state.currentData.top_languages_meta);
-    renderContributions(state.currentData.contributions);
+    renderContributions(state.currentData.contributions, state.currentData?.user?.login);
     window.__ghFinderLastContribSync = Date.now();
 
     // Self-heal missing starred count immediately in background without waiting for a tab click
@@ -517,7 +517,7 @@ function initEventListeners() {
           state.currentData?.user?.login?.toLowerCase() === login.toLowerCase()
         ) {
           state.currentData.contributions = freshContrib;
-          renderContributions(freshContrib);
+          renderContributions(freshContrib, login);
         }
       } catch (err) {
         // Ignore abort / transient background refresh failures

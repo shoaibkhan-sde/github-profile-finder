@@ -520,6 +520,77 @@ describe('Rate-Limit Behavior, Security Controls & Client Resilience', () => {
       expect(gridEl.classList.contains('is-empty')).toBe(false);
       expect(containerEl.classList.contains('is-empty')).toBe(false);
     });
+
+    it('renders a clean 0-contribution year grid ONLY for google, github, and vercel sample orgs when weeks are empty', async () => {
+      const { renderContributions } = await import('../../../client/js/dom.js');
+
+      function makeClassList() {
+        const set = new Set();
+        return {
+          add: (...cls) => cls.forEach((c) => set.add(c)),
+          remove: (...cls) => cls.forEach((c) => set.delete(c)),
+          toggle: (c, force) => (force ? set.add(c) : set.delete(c)),
+          contains: (c) => set.has(c)
+        };
+      }
+
+      const containerEl = { classList: makeClassList() };
+      const monthNodes = [];
+      const monthsRow = {
+        innerHTML: '',
+        style: { setProperty: () => {} },
+        appendChild: (node) => monthNodes.push(node),
+        removeChild: () => {},
+        get lastElementChild() {
+          return monthNodes.at(-1) || null;
+        }
+      };
+      const gridNodes = [];
+      const gridEl = {
+        innerHTML: '',
+        classList: makeClassList(),
+        style: { setProperty: () => {}, removeProperty: () => {} },
+        closest: (sel) => (sel === '.heatmap-container' ? containerEl : null),
+        appendChild: (node) => gridNodes.push(node)
+      };
+      const subtitleEl = { textContent: '' };
+
+      global.document = {
+        getElementById: (id) => {
+          if (id === 'heatmap-grid') return gridEl;
+          if (id === 'heatmap-months') return monthsRow;
+          if (id === 'contrib-subtitle') return subtitleEl;
+          return null;
+        },
+        createElement: (tag) => {
+          const el = new TestElement(tag);
+          el.classList = makeClassList();
+          return el;
+        }
+      };
+
+      for (const sampleLogin of ['google', 'github', 'Vercel']) {
+        gridNodes.length = 0;
+        monthNodes.length = 0;
+        renderContributions({ totalContributions: null, year: 2026, live: false, weeks: [] }, sampleLogin);
+        expect(gridEl.classList.contains('is-empty')).toBe(false);
+        expect(containerEl.classList.contains('is-empty')).toBe(false);
+        expect(subtitleEl.textContent).toBe('0 contributions in 2026');
+        expect(gridNodes.length).toBe(365);
+        expect(gridNodes.every((cell) => cell.className === 'heatmap-cell' && cell.attributes['data-level'] === '0')).toBe(true);
+        expect(monthNodes.map((m) => m.textContent)).toEqual(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+      }
+
+      // Non-sample orgs/users must preserve existing unavailable fallback
+      gridNodes.length = 0;
+      monthNodes.length = 0;
+      renderContributions({ totalContributions: null, year: 2026, live: false, weeks: [] }, 'facebook');
+      expect(gridEl.classList.contains('is-empty')).toBe(true);
+      expect(containerEl.classList.contains('is-empty')).toBe(true);
+      expect(subtitleEl.textContent).toBe('Activity in 2026');
+      expect(gridNodes.length).toBe(1);
+      expect(gridNodes[0].textContent).toBe('Contribution calendar temporarily unavailable.');
+    });
   });
 });
 

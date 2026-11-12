@@ -13,8 +13,12 @@ describe('Full-Stack Static & Routing Integration', () => {
     expect(res.text).toContain('id="history-dropdown"');
     expect(res.text).toContain('https://github.com/shoaibkhan-sde');
     expect(res.text).toContain('<link rel="icon" href="/favicon.ico" sizes="any">');
-    expect(res.text).toContain('<link rel="icon" type="image/png" href="/github-profile-finder-favicon.png">');
+    expect(res.text).toContain('<link rel="icon" type="image/png" href="/github-profile-finder-favicon.png" sizes="512x512">');
     expect(res.text).toContain('<link rel="apple-touch-icon" href="/github-profile-finder-favicon.png">');
+    expect(res.text).toContain('<meta property="og:site_name" content="GitHub Profile Finder">');
+    expect(res.text).toContain('<meta property="og:url" content="https://github-profile-finder-api.onrender.com/">');
+    expect(res.text).toContain('"@type": "WebSite"');
+    expect(res.text).toContain('"name": "GitHub Profile Finder"');
     expect(res.text).toContain('<meta name="google-site-verification" content="Vp1D6d2-UePtuTK1XZVRsgzpGIoD4wt6oz1TYJhOyvs" />');
     expect(res.text).toContain('<link rel="canonical" href="https://github-profile-finder-api.onrender.com/" />');
     expect(res.text).not.toContain('href="./index.html"');

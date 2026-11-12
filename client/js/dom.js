@@ -1112,22 +1112,65 @@ export function renderTopLanguages(languages = [], meta = null) {
   }
 }
 
+const SAMPLE_EMPTY_CALENDAR_USERS = new Set(['google', 'github', 'vercel']);
+
+function buildEmptyYearCalendarWeeks(year) {
+  const safeYear = Number.isInteger(year) && year > 1970 ? year : new Date().getUTCFullYear();
+  const weeks = [];
+  let currentWeek = [];
+  const start = new Date(Date.UTC(safeYear, 0, 1));
+  const end = new Date(Date.UTC(safeYear, 11, 31));
+
+  for (let d = new Date(start); d <= end; d.setUTCDate(d.getUTCDate() + 1)) {
+    const weekday = d.getUTCDay();
+    if (weekday === 0 && currentWeek.length > 0) {
+      weeks.push({ contributionDays: currentWeek });
+      currentWeek = [];
+    }
+    const yyyy = d.getUTCFullYear();
+    const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
+    const dd = String(d.getUTCDate()).padStart(2, '0');
+    const date = `${yyyy}-${mm}-${dd}`;
+    currentWeek.push({
+      date,
+      weekday,
+      count: 0,
+      level: 0,
+      tooltip: `0 contributions on ${date}`
+    });
+  }
+
+  if (currentWeek.length > 0) {
+    weeks.push({ contributionDays: currentWeek });
+  }
+
+  return weeks;
+}
+
 /**
  * Renders the real GitHub Contributions Calendar (~53 weeks x 7 days).
- * Never renders fabricated placeholder activity when live data is unavailable.
+ * Never renders fabricated placeholder activity when live data is unavailable,
+ * except for the 3 empty-state sample organization examples (google, github, vercel)
+ * where a clean 0-contribution year grid keeps the sample experience consistent.
  */
-export function renderContributions(contribData = {}) {
+export function renderContributions(contribData = {}, username = '') {
   const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const displayYear = Number(contribData?.year) || new Date().getUTCFullYear();
   const yearPrefix = `${displayYear}-`;
   const rawWeeks = Array.isArray(contribData?.weeks) ? contribData.weeks : [];
-  const weeks = rawWeeks
+  let weeks = rawWeeks
     .map((week) => ({
       contributionDays: (Array.isArray(week?.contributionDays) ? week.contributionDays : []).filter(
         (day) => !day?.date || day.date.startsWith(yearPrefix)
       )
     }))
     .filter((week) => week.contributionDays.length > 0);
+
+  const normalizedUsername = String(username || contribData?.username || '').trim().toLowerCase();
+  const useSampleEmptyCalendar = weeks.length === 0 && SAMPLE_EMPTY_CALENDAR_USERS.has(normalizedUsername);
+  if (useSampleEmptyCalendar) {
+    weeks = buildEmptyYearCalendarWeeks(displayYear);
+  }
 
   const subtitle = document.getElementById('contrib-subtitle');
   if (subtitle) {
@@ -1136,6 +1179,8 @@ export function renderContributions(contribData = {}) {
     } else if (typeof contribData?.total_contributions === 'number') {
       const n = contribData.total_contributions;
       subtitle.textContent = `${n.toLocaleString('en-US')} contribution${n === 1 ? '' : 's'} in ${displayYear}`;
+    } else if (useSampleEmptyCalendar) {
+      subtitle.textContent = `0 contributions in ${displayYear}`;
     } else {
       subtitle.textContent = `Activity in ${displayYear}`;
     }

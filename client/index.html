@@ -13,14 +13,27 @@
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" href="/github-profile-finder-favicon.png">
+  <link rel="icon" type="image/png" href="/github-profile-finder-favicon.png" sizes="512x512">
   <link rel="apple-touch-icon" href="/github-profile-finder-favicon.png">
 
   <!-- Open Graph / Social Sharing -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GitHub Profile Finder">
+  <meta property="og:url" content="https://github-profile-finder-api.onrender.com/">
   <meta property="og:title" content="GitHub Profile Finder — Search Profiles, Repositories & Stats">
   <meta property="og:description"
     content="Inspect public GitHub profile information, repositories, stars, forks, and language statistics using official GitHub data.">
+
+  <!-- Structured Data (Site Name for Google Search) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "GitHub Profile Finder",
+    "alternateName": ["github-profile-finder", "GitHub Profile Search"],
+    "url": "https://github-profile-finder-api.onrender.com/"
+  }
+  </script>
 
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -352,7 +365,7 @@
   </footer>
 
   <!-- App Entry Point Module -->
-  <script type="module" src="./js/app.js?v=15"></script>
+  <script type="module" src="./js/app.js?v=16"></script>
 </body>
 
 </html>
